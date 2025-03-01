@@ -6,6 +6,7 @@ Feature: Get Invoices
     * def headers = headers
     * configure headers = headers
 
+  # -------------- Positive Test case ---------------------
   Scenario: Verify get Invoices API return All invoices
     Given url URL
     And path '/apis/external/invoice/getInvoices'
@@ -29,6 +30,8 @@ Feature: Get Invoices
     And match $.invoices[0].vendor.currency == "INR"
     And match $.invoices[0].vendor.email == "dnvndtest@yopmail.com"
     And match $.invoices[0].vendor.mobile == "7208849985"
+
+    # --------------Negative Test case ------------------------------
 
 
 
