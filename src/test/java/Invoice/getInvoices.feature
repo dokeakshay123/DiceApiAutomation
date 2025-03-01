@@ -32,6 +32,7 @@ Feature: Get Invoices
     And match $.invoices[0].vendor.mobile == "7208849985"
 
     # --------------Negative Test case ------------------------------
+
   Scenario Outline: Verify if user passing wrong date range then API return invoices
     Given url URL
     And path '/apis/external/invoice/getInvoices'
