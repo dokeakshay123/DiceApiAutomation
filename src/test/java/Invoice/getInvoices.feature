@@ -32,6 +32,25 @@ Feature: Get Invoices
     And match $.invoices[0].vendor.mobile == "7208849985"
 
     # --------------Negative Test case ------------------------------
+  Scenario Outline: Verify if user passing wrong date range then API return invoices
+    Given url URL
+    And path '/apis/external/invoice/getInvoices'
+    And param start_date = '<startDate>'
+    And param end_date = '<EndDate>'
+    And param offset = 0
+    And param pageSize = '1000'
+    When method get
+    Then status 409
+    And print response
+    And print responseTime
+    And match $.message == "Unable to fetch invoices. Selected date range should be within 30 days."
+    And match $.error ==  "Unable to fetch invoices. Selected date range should be within 30 days."
+    Examples:
+      | startDate  | EndDate    |
+      | 01-01-2025 | 21-05-2025 |
+      | 01-01-2025 | 21-03-2025 |
+
+
 
 
 
