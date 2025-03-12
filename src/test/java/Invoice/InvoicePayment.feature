@@ -70,5 +70,19 @@ Feature: Payment Update.
     And match $.message == "Provided value for key amount is not a valid double"
     And match $.error == "Provided value for key amount is not a valid double"
 
+  Scenario: Payment update with empty request body
+    * def emptyReq = {}
+    Given url URL
+    And path '/apis/external/invoice/postInvoicePayment'
+    And request emptyReq
+    When method POST
+    Then status 409
+    And configure continueOnStepFailure = { enabled: true, continueAfter: false, keywords: ['match', 'status'] }
+    And print response
+    And match $.message == "Null value provided for key invoiceId."
+    And match $.error == "Null value provided for key invoiceId."
+
+
+
 
 
