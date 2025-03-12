@@ -1,6 +1,6 @@
 function fn() {
   var config = {
-    baseURL: 'https://heimdall.eka.io', // Replace with actual base URL
+    baseURL: 'https://heimdall.eka.io',
     headers: {
       'DICE-APP-ID': 'dnvtest',
       'X-CLIENT-ID': 'bfaaa382e',
