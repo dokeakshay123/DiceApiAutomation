@@ -76,7 +76,7 @@ Feature: Payment Update.
     And path '/apis/external/invoice/postInvoicePayment'
     And request emptyReq
     When method POST
-    Then status 409
+    Then status 407
     And configure continueOnStepFailure = { enabled: true, continueAfter: false, keywords: ['match', 'status'] }
     And print response
     And match $.message == "Null value provided for key invoiceId."
