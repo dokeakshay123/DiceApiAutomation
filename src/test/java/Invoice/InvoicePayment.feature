@@ -82,6 +82,23 @@ Feature: Payment Update.
     And match $.message == "Null value provided for key invoiceId."
     And match $.error == "Null value provided for key invoiceId."
 
+  @INVPaymentTest1
+  Scenario Outline: Payment Update with Invalid UTR
+    Given url URL
+    And path '/apis/external/invoice/postInvoicePayment'
+    And request req
+    And set req.utr = '<utr>'
+    When method POST
+    Then status 409
+    And configure continueOnStepFailure = { enabled: true, continueAfter: false, keywords: ['match', 'status'] }
+    And print response
+    And match $.message == "Null value provided for key utr."
+    And match $.error == "Null value provided for key utr."
+    Examples:
+      | utr      |  |
+      | Test123    |  |
+      | VI-DNVTEST |  |
+
 
 
 
