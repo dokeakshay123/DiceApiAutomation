@@ -47,6 +47,8 @@ Feature: Get Invoices
     And print responseTime
     And match $.message == "Unable to fetch invoices. Selected date range should be within 30 days."
     And match $.error ==  "Unable to fetch invoices. Selected date range should be within 30 days."
+    And match $.error ==  "Unable to fetch invoices. Selected date range should be within 30 days."
+
     Examples:
       | startDate  | EndDate    |
       | 01-01-2025 | 21-05-2025 |
