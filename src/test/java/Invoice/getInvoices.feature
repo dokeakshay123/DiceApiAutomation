@@ -29,7 +29,7 @@ Feature: Get Invoices
     And match $.invoices[0].vendor.title == "Inventicon Business Intelligence Pvt. Ltd."
     And match $.invoices[0].vendor.tradeName == "Inventicon Business Intelligence Pvt. Ltd."
     And match $.invoices[0].vendor.currency == "INR"
-    And match $.invoices[0].vendor.email == "dnvndtest@yopmail.com "
+    And match $.invoices[0].vendor.email == "dnvndtest@yopmail.com"
     And match $.invoices[0].vendor.mobile == "7208849985"
 
     # --------------Negative Test case ------------------------------
