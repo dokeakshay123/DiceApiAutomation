@@ -27,6 +27,7 @@ Feature: Payment Update.
     And configure continueOnStepFailure = { enabled: true, continueAfter: false, keywords: ['match', 'status'] }
     Then status 200
     And print response
+    And print responseTime
 
     #_---------------------Negative Scenerios ----------------------
   Scenario Outline: Payment Update with Invalid Invoice ID
@@ -82,6 +83,35 @@ Feature: Payment Update.
     And match $.message == "Null value provided for key invoiceId."
     And match $.error == "Null value provided for key invoiceId."
 
+  @INVPaymentTest1
+  Scenario Outline: Payment Update with Invalid UTR
+    Given url URL
+    And path '/apis/external/invoice/postInvoicePayment'
+    And request req
+    And set req.utr = '<utr>'
+    When method POST
+    Then status 409
+    And configure continueOnStepFailure = { enabled: true, continueAfter: false, keywords: ['match', 'status'] }
+    And print response
+    And match $.message == "Null value provided for key utr."
+    And match $.error == "Null value provided for key utr."
+    Examples:
+      | utr      |  |
+      | Test123    |  |
+      | VI-DNVTEST |  |
+
+
+  Scenario: Missing Invoice ID
+    * def invalidReq = req
+    * set invalidReq.invoiceId = null
+    Given url URL
+    And path '/apis/external/invoice/postInvoicePayment'
+    And request invalidReq
+    When method POST
+    Then status 409
+    And match response.message contains "Null value provided for key invoiceId."
+    And match response.message not contains " value provided for key invoiceId."
+    And print response
 
 
 
